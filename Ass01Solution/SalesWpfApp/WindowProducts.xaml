@@ -49,5 +49,9 @@
                 VerticalAlignment="Top" 
                 RenderTransformOrigin="-0.518,-0.076" 
                 Height="48" Width="67"/>
+        <Button x:Name="btnOrder"
+                Background="Green"
+                Foreground="White"
+            Content="Order" HorizontalAlignment="Left" Margin="678,20,0,0" VerticalAlignment="Top" Height="58" Width="79"/>
     </Grid>
 </Window>

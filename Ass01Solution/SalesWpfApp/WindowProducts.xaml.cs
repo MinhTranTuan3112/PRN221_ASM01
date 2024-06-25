@@ -1,4 +1,5 @@
-﻿using DataAccess.DTOs.Product;
+﻿using BusinessObject.Enum;
+using DataAccess.DTOs.Product;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -83,6 +84,12 @@ namespace SalesWpfApp
                     throw new Exception("Please select a product for deleting");
                 }
 
+                var result = MessageBox.Show("Are you sure you want to delete this product", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result is not MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
                 _productRepository.DeleteProduct(currentProduct.ProductId);
 
             }
@@ -96,7 +103,7 @@ namespace SalesWpfApp
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Reset filter?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result != MessageBoxResult.Yes)
+            if (result is not MessageBoxResult.Yes)
             {
                 return;
             }
@@ -155,6 +162,8 @@ namespace SalesWpfApp
 
         private void WindowProducts_Loaded(object sender, RoutedEventArgs e)
         {
+            bool isUser = MemberSession.Role == Role.User.ToString();
+            btnOrder.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
             LoadProducts();
         }
 

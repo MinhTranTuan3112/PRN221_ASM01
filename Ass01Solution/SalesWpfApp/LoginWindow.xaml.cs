@@ -1,7 +1,10 @@
-﻿using DataAccess.DAO;
+﻿using BusinessObject.Enum;
+using DataAccess.DAO;
 using DataAccess.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,15 +54,41 @@ namespace SalesWpfApp
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            var member = _memberRepository.Login(Email, Password);
+            try
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                                                    .SetBasePath(Directory.GetCurrentDirectory())
+                                                    .AddJsonFile("appsettings.json", true, true).Build();
 
-            if (member is not null)
-            {
-                new WindowProducts().Show();
+                string adminEmail = configuration["AdminAccount:Email"]!;
+                string adminPassword = configuration["AdminAccount:Password"]!;
+
+
+                var member = _memberRepository.Login(Email, Password);
+
+                if (member is not null)
+                {
+                    MemberSession.CurrentMember = member;
+                    //if (Email == adminEmail && Password == adminPassword)
+                    //{
+                    //    MemberSession.Role = "Admin";
+                    //}
+
+                    new WindowProducts().Show();
+                }
+                else if (Email == adminEmail && Password == adminPassword)
+                {
+                    MemberSession.Role = Role.Admin.ToString();
+                    new WindowProducts().Show();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong email or password", "Login error", MessageBoxButton.OK);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Wrong email or password", "Login error", MessageBoxButton.OK);
+                MessageBox.Show(ex.Message);
             }
         }
     }
