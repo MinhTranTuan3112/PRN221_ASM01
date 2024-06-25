@@ -31,13 +31,23 @@ namespace SalesWpfApp
             }
 
             this.Loaded += WindowMembers_Loaded;
+            txtKeyword.TextChanged += TxtKeyword_TextChanged;
+        }
+
+        private void TxtKeyword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoadMembers();
         }
 
         private void WindowMembers_Loaded(object sender, RoutedEventArgs e)
         {
-            var members = _memberRepository.GetMembers();
-            dgMembers.ItemsSource = members;
+            LoadMembers();
+        }
 
+        private void LoadMembers()
+        {
+            var members = _memberRepository.GetMembers(txtKeyword.Text);
+            dgMembers.ItemsSource = members;
         }
     }
 }

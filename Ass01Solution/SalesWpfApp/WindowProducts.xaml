@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWpfApp"
         mc:Ignorable="d"
-        Title="WindowProducts" Height="450" Width="800">
+        Title="Products Management" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid
+        x:Name="dgProducts"
+        Width="600"
+        Height="300" Margin="39,96,161,38"/>
+
+        <Label x:Name="lbSearch" Content="Search" HorizontalAlignment="Left" Margin="39,29,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtKeyword" HorizontalAlignment="Left" Margin="106,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279"/>
+        <Label x:Name="lbStartPrice" Content="From price" HorizontalAlignment="Left" Margin="39,56,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.497,1.137"/>
+        <TextBox x:Name="txtStartPrice" 
+                 HorizontalAlignment="Left" 
+                 Margin="106,60,0,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="120"/>
+
+        <Label x:Name="lbEndPrice" Content="To price" HorizontalAlignment="Left" Margin="251,56,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEndPrice" 
+          HorizontalAlignment="Left" 
+          Margin="325,60,0,0" 
+          TextWrapping="Wrap" 
+          VerticalAlignment="Top" 
+          Width="120"/>
+
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="684,96,0,0" VerticalAlignment="Top" Height="53" Width="67"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="684,215,0,0" VerticalAlignment="Top" Height="53" Width="67"/>
+        <Button x:Name="btnSubmit"
+                Content="Apply filter" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="36" Width="65"/>
+        <Button x:Name="btnReset" 
+                Content="Reset filter"
+                HorizontalAlignment="Left" 
+                Margin="481,56,0,0" 
+                VerticalAlignment="Top"
+                Height="35" Width="65"/>
     </Grid>
 </Window>

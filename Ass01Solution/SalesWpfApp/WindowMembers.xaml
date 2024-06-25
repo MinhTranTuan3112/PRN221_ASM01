@@ -11,5 +11,12 @@
             x:Name="dgMembers"
             Width="600"
             Height="300" Margin="39,96,161,38"/>
+        <Label x:Name="lbKeyword" Content="Enter member email"
+               Height="30"
+               Width="150" Margin="39,23,611,381"/>
+        <TextBox HorizontalAlignment="Left" Margin="39,58,0,0" TextWrapping="Wrap"
+                 x:Name="txtKeyword" 
+                 VerticalAlignment="Top"
+                 Width="200"/>
     </Grid>
 </Window>

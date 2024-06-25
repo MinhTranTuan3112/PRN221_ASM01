@@ -55,7 +55,7 @@ namespace SalesWpfApp
 
             if (member is not null)
             {
-                new WindowMembers().Show();
+                new WindowProducts().Show();
             }
             else
             {

@@ -37,13 +37,14 @@ namespace DataAccess.DAO
         public Member? Login(string email, string password)
         {
             var member = _context.Members.FirstOrDefault(m => m.Email == email && m.Password == password);
-
             return member;
         }
 
         public List<Member> GetMembers(string keyword = "")
         {
-            return _context.Members.ToList();
+            return _context.Members
+                    .Where(m => m.Email.ToLower().Contains(keyword.ToLower()))
+                    .ToList();
         }
     }
 }

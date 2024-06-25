@@ -11,6 +11,7 @@ namespace DataAccess.Repositories
     public interface IMemberRepository
     {
         Member? Login(string email, string password);
+
         List<GetMemberDto> GetMembers(string keyword = "");
     }
 
