@@ -54,8 +54,6 @@ namespace SalesWpfApp
             set { txtKeyword.Text = value; }
         }
 
-
-
         public WindowProducts()
         {
             InitializeComponent();
@@ -71,10 +69,38 @@ namespace SalesWpfApp
             txtKeyword.TextChanged += TxtKeyword_TextChanged;
             btnSubmit.Click += BtnSubmit_Click;
             btnReset.Click += BtnReset_Click;
+            btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var currentProduct = dgProducts.SelectedItem as GetProductDto;
+
+                if (currentProduct is null)
+                {
+                    throw new Exception("Please select a product for deleting");
+                }
+
+                _productRepository.DeleteProduct(currentProduct.ProductId);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Reset filter?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
             ResetFilter();
             LoadProducts();
         }

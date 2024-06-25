@@ -82,6 +82,14 @@ namespace SalesWpfApp
         {
             try
             {
+                string message = IsUpdate ? "Update this product?" : "Create this product?";
+
+                var result = MessageBox.Show(message, "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes)
+                {
+                    return;
+                }
 
                 if (!IsUpdate)
                 {
@@ -89,26 +97,8 @@ namespace SalesWpfApp
                     return;
                 }
 
-                var product = this.DataContext as GetProductDetailsDto;
+                PerformUpdate();
 
-                var updatingProduct = product.Adapt<Product>();
-                
-                updatingProduct.Category = cbCategory.SelectedItem.Adapt<Category>();
-
-                var updateValidator = new UpdateProductValidator();
-
-                var validationResult = updateValidator.Validate(updatingProduct);
-
-                if (!validationResult.IsValid)
-                {
-                    string errorMessage = validationResult.ToString("\n");
-
-                    throw new Exception(errorMessage);
-                }
-
-                _productRepository.UpdateProduct(updatingProduct);
-
-                MessageBox.Show("Update product success");
                 this.Close();
             }
 
@@ -116,6 +106,30 @@ namespace SalesWpfApp
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void PerformUpdate()
+        {
+            var product = this.DataContext as GetProductDetailsDto;
+
+            var updatingProduct = product.Adapt<Product>();
+
+            updatingProduct.Category = cbCategory.SelectedItem.Adapt<Category>();
+
+            var updateValidator = new UpdateProductValidator();
+
+            var validationResult = updateValidator.Validate(updatingProduct);
+
+            if (!validationResult.IsValid)
+            {
+                string errorMessage = validationResult.ToString("\n");
+
+                throw new Exception(errorMessage);
+            }
+
+            _productRepository.UpdateProduct(updatingProduct);
+
+            MessageBox.Show("Update product success");
         }
 
         private void ProductDetailsWindow_Loaded(object sender, RoutedEventArgs e)

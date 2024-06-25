@@ -15,11 +15,13 @@ namespace DataAccess.Repositories
         public void AddProduct(CreateProductDto createProductDto)
         {
             ProductDAO.Instance.AddProduct(createProductDto.Adapt<Product>());
+            ProductDAO.Instance.SaveChanges();
         }
 
         public void DeleteProduct(int productId)
         {
             ProductDAO.Instance.DeleteProduct(productId);
+            ProductDAO.Instance.SaveChanges();
         }
 
         public GetProductDetailsDto? GetProductDetailsById(int productId)

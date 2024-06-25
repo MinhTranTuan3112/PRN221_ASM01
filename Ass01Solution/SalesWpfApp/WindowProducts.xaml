@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SalesWpfApp"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Products Management" Height="450" Width="800">
     <Grid>
         <DataGrid
         x:Name="dgProducts"
         Width="600"
-        Height="300" Margin="39,96,161,38"/>
+        Height="300" Margin="39,96,161,38" IsReadOnly="True"/>
 
         <Label x:Name="lbSearch" Content="Search" HorizontalAlignment="Left" Margin="39,29,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtKeyword" HorizontalAlignment="Left" Margin="106,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279"/>
@@ -34,11 +35,19 @@
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="684,215,0,0" VerticalAlignment="Top" Height="53" Width="67"/>
         <Button x:Name="btnSubmit"
                 Content="Apply filter" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="36" Width="65"/>
+        
         <Button x:Name="btnReset" 
                 Content="Reset filter"
                 HorizontalAlignment="Left" 
                 Margin="481,56,0,0" 
                 VerticalAlignment="Top"
                 Height="35" Width="65"/>
+        
+        <Button x:Name="btnDelete" Content="Delete" 
+                HorizontalAlignment="Left" 
+                Margin="684,322,0,0"
+                VerticalAlignment="Top" 
+                RenderTransformOrigin="-0.518,-0.076" 
+                Height="48" Width="67"/>
     </Grid>
 </Window>
