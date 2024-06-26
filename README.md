@@ -1,5 +1,5 @@
 - Họ và tên : Trần Tuấn Minh
 - Số điện thoại : 0989888806
 - MSSV : SE172842
-- Điểm tự đánh giá : 
+- Điểm tự đánh giá : 7
 - Link youtube or google drive (public): 
