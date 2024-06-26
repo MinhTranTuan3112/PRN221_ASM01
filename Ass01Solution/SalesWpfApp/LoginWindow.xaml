@@ -33,7 +33,7 @@
         <TextBox x:Name="txtEmail"
                 Grid.Column="1"
                 FontSize="28"
-                Grid.Row="0" Margin="0,47,0,44" />
+                Grid.Row="0" Margin="0,47,107,44" Grid.ColumnSpan="2" />
         <Label x:Name="lbPassword" 
             Grid.Column="0"
             Grid.Row="1"
@@ -46,7 +46,7 @@
                      Grid.Column="1"
                      Grid.Row="1"
                       FontSize="28"
-                      Margin="0,47,0,44" />
+                      Margin="0,47,107,44" Grid.ColumnSpan="2" />
         <Button Content="Login"
                 FontSize="30"
                 FontWeight="Bold"

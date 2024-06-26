@@ -54,7 +54,16 @@ namespace SalesWpfApp
 
         private void PerformCreate()
         {
-            var createProductDto = this.DataContext as CreateProductDto;
+
+            var createProductDto = new CreateProductDto
+            {
+                CategoryId = Convert.ToInt32(cbCategory.SelectedValue),
+                ProductName = txtProductName.Text,
+                Weight = txtWeight.Text,
+                UnitPrice = Convert.ToDecimal(txtUnitPrice.Text),
+                UnitsInStock = Convert.ToInt32(txtUnitsInStock.Text)
+            };
+
             var createValidator = new CreateProductValidator();
 
             if (createProductDto is null)
@@ -138,6 +147,8 @@ namespace SalesWpfApp
             {
                 tbTitle.Text = IsUpdate ? "Product Details" : "Create New Product";
                 btnSave.Content = IsUpdate ? "Save" : "Create";
+                txtId.IsReadOnly = true;
+                txtId.Visibility = IsUpdate ? Visibility.Visible : Visibility.Hidden;
 
                 var categories = _categoryRepository.GetCategories();
                 cbCategory.ItemsSource = categories;

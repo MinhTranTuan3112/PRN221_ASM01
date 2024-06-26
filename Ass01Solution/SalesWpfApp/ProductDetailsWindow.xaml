@@ -27,6 +27,7 @@
         <TextBlock
             x:Name="tbTitle"
             Text="Product Details"
+            FontWeight="Bold"
             Grid.Column="1"
             Grid.Row="0"
             Grid.ColumnSpan="2"
@@ -100,6 +101,7 @@
         Grid.Column="0"
         Grid.Row="5"/>
         <TextBox 
+            x:Name="txtUnitsInStock"
             Text="{Binding UnitsInStock}"
         FontSize="20"
         Grid.Column="1"
@@ -123,7 +125,7 @@
             Margin="10, 10, 10, 10"/>
 
         <Button x:Name="btnSave" Content="Save"
-                FontSize="25"
+                FontSize="23"
                 Grid.Column="1"
                 Grid.Row="7"
                 Grid.ColumnSpan="1"

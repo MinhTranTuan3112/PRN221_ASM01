@@ -12,7 +12,15 @@ namespace DataAccess.Repositories
     {
         Member? Login(string email, string password);
 
+        void AddMember(CreateMemberDto createMemberDto);
+
         List<GetMemberDto> GetMembers(string keyword = "");
+
+        Member? GetMemberById(int id);
+
+        void UpdateMember(UpdateMemberDto updateMemberDto);
+
+        void DeleteMember(int memberId);
     }
 
 }

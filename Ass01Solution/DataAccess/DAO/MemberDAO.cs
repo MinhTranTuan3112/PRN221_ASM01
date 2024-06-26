@@ -1,4 +1,5 @@
 ﻿using BusinessObject;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,32 @@ namespace DataAccess.DAO
             return _context.Members
                     .Where(m => m.Email.ToLower().Contains(keyword.ToLower()))
                     .ToList();
+        }
+
+        public void AddMember(Member member)
+        {
+            _context.Members.Add(member);
+        }
+
+        public Member? GetMemberById(int memberId)
+        {
+            return _context.Members.SingleOrDefault(m => m.MemberId == memberId);
+        }
+
+        public void UpdateMember(Member member)
+        {
+            _context.Members.Update(member);
+        }
+
+        public void DeleteMember(int memberId)
+        {
+            _context.Members.Where(m => m.MemberId == memberId)
+                            .ExecuteDelete();
+        }
+
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
         }
     }
 }

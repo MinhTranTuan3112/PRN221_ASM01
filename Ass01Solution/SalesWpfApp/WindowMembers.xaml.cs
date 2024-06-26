@@ -1,4 +1,5 @@
-﻿using DataAccess.Repositories;
+﻿using DataAccess.DTOs.Member;
+using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,76 @@ namespace SalesWpfApp
 
             this.Loaded += WindowMembers_Loaded;
             txtKeyword.TextChanged += TxtKeyword_TextChanged;
+            btnCreate.Click += BtnCreate_Click;
+            btnUpdate.Click += BtnUpdate_Click;
+            btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Delete this member?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result is not MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                var currentMember = dgMembers.SelectedItem as GetMemberDto;
+
+                if (currentMember is null)
+                {
+                    throw new Exception("Please select a member");
+                }
+
+                _memberRepository.DeleteMember(currentMember.MemberId);
+
+                MessageBox.Show("Delete member success");
+                LoadMembers();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var currentMember = dgMembers.SelectedItem as GetMemberDto;
+
+                if (currentMember is null)
+                {
+                    throw new Exception("Please select a member");
+                }
+
+                var detailsWindow = new MemberDetailsWindow()
+                {
+                    IsUpdate = true,
+                    MemberId = currentMember.MemberId
+                };
+
+                detailsWindow.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var detailsWindow = new MemberDetailsWindow()
+            {
+                IsUpdate = false
+            };
+
+            detailsWindow.Show();
         }
 
         private void TxtKeyword_TextChanged(object sender, TextChangedEventArgs e)
@@ -46,8 +117,15 @@ namespace SalesWpfApp
 
         private void LoadMembers()
         {
-            var members = _memberRepository.GetMembers(txtKeyword.Text);
-            dgMembers.ItemsSource = members;
+            try
+            {
+                var members = _memberRepository.GetMembers(txtKeyword.Text);
+                dgMembers.ItemsSource = members;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

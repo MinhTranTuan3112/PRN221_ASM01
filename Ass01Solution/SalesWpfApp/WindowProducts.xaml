@@ -73,6 +73,13 @@
                 Margin="658,128,0,0" 
                 VerticalAlignment="Top"/>
         <Label Content="Quantity" HorizontalAlignment="Left" Margin="690,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.357,0.668"/>
+        <Button x:Name="btnRefresh" 
+                Content="Refresh"
+                HorizontalAlignment="Left"
+                Margin="678,178,0,0" 
+                VerticalAlignment="Top"
+                Height="39" 
+                Width="73"/>
 
     </Grid>
 </Window>

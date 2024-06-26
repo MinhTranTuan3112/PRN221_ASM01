@@ -98,6 +98,13 @@ namespace SalesWpfApp
             btnViewCart.Click += BtnViewCart_Click;
             btnIncrease.Click += BtnIncrease_Click;
             btnDecrease.Click += BtnDecrease_Click;
+            btnRefresh.Click += BtnRefresh_Click;
+        }
+
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            ResetFilter();
+            LoadProducts();
         }
 
         private void BtnDecrease_Click(object sender, RoutedEventArgs e)
