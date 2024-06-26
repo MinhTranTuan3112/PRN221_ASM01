@@ -31,27 +31,48 @@
           VerticalAlignment="Top" 
           Width="120"/>
 
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="684,96,0,0" VerticalAlignment="Top" Height="53" Width="67"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="684,215,0,0" VerticalAlignment="Top" Height="53" Width="67"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="678,235,0,0" VerticalAlignment="Top" Height="28" Width="73" RenderTransformOrigin="0.532,2.744"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="678,280,0,0" VerticalAlignment="Top" Height="32" Width="73"/>
         <Button x:Name="btnSubmit"
                 Content="Apply filter" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="36" Width="65"/>
-        
+
         <Button x:Name="btnReset" 
                 Content="Reset filter"
                 HorizontalAlignment="Left" 
                 Margin="481,56,0,0" 
                 VerticalAlignment="Top"
                 Height="35" Width="65"/>
-        
+
         <Button x:Name="btnDelete" Content="Delete" 
                 HorizontalAlignment="Left" 
-                Margin="684,322,0,0"
+                Margin="678,340,0,0"
                 VerticalAlignment="Top" 
                 RenderTransformOrigin="-0.518,-0.076" 
-                Height="48" Width="67"/>
-        <Button x:Name="btnOrder"
+                Height="29" Width="73"/>
+        <Button x:Name="btnAddToCart"
                 Background="Green"
                 Foreground="White"
-            Content="Order" HorizontalAlignment="Left" Margin="678,20,0,0" VerticalAlignment="Top" Height="58" Width="79"/>
+            Content="Add to cart" HorizontalAlignment="Left" Margin="678,20,0,0" VerticalAlignment="Top" Height="58" Width="79"/>
+        <Button x:Name="btnViewCart"
+            Content="View Cart" HorizontalAlignment="Left" Margin="588,31,0,0" VerticalAlignment="Top" Height="38" Width="65"/>
+        <TextBox x:Name="txtQuantity" 
+                 Text="1"
+                 TextAlignment="Center"
+                 HorizontalAlignment="Left" 
+                 Margin="690,129,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="56"/>
+       <Button x:Name="btnIncrease" Content="+" HorizontalAlignment="Left" 
+               Width="20"
+               Height="20"
+               Margin="755,128,0,0"
+               VerticalAlignment="Top"/>
+        <Button x:Name="btnDecrease" Content="-" Width="20"
+                Height="20"
+                HorizontalAlignment="Left"
+                Margin="658,128,0,0" 
+                VerticalAlignment="Top"/>
+        <Label Content="Quantity" HorizontalAlignment="Left" Margin="690,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.357,0.668"/>
+
     </Grid>
 </Window>

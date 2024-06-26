@@ -1,4 +1,6 @@
 ﻿using BusinessObject.Enum;
+using DataAccess.DTOs.Order;
+using DataAccess.DTOs.OrderDetail;
 using DataAccess.DTOs.Product;
 using DataAccess.Repositories;
 using System;
@@ -23,6 +25,10 @@ namespace SalesWpfApp
     public partial class WindowProducts : Window
     {
         private readonly IProductRepository _productRepository;
+
+        private readonly IOrderRepository _orderRepository;
+
+        private readonly IOrderDetailRepository _orderDetailRepository;
 
 
         public decimal? StartPrice
@@ -55,6 +61,13 @@ namespace SalesWpfApp
             set { txtKeyword.Text = value; }
         }
 
+        public int Quantity
+        {
+            get { return Convert.ToInt32(txtQuantity.Text); }
+            set { txtQuantity.Text = value.ToString(); }
+        }
+
+
         public WindowProducts()
         {
             InitializeComponent();
@@ -64,6 +77,16 @@ namespace SalesWpfApp
                 _productRepository = new ProductRepository();
             }
 
+            if (_orderRepository is null)
+            {
+                _orderRepository = new OrderRepository();
+            }
+
+            if (_orderDetailRepository is null)
+            {
+                _orderDetailRepository = new OrderDetailRepository();
+            }
+
             this.Loaded += WindowProducts_Loaded;
             btnUpdate.Click += BtnUpdate_Click;
             btnCreate.Click += BtnCreate_Click;
@@ -71,6 +94,103 @@ namespace SalesWpfApp
             btnSubmit.Click += BtnSubmit_Click;
             btnReset.Click += BtnReset_Click;
             btnDelete.Click += BtnDelete_Click;
+            btnAddToCart.Click += BtnAddToCart_Click;
+            btnViewCart.Click += BtnViewCart_Click;
+            btnIncrease.Click += BtnIncrease_Click;
+            btnDecrease.Click += BtnDecrease_Click;
+        }
+
+        private void BtnDecrease_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Quantity is 1)
+                {
+                    return;
+                }
+
+                --Quantity;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnIncrease_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ++Quantity;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void BtnViewCart_Click(object sender, RoutedEventArgs e)
+        {
+            new CartWindow().Show();
+        }
+
+        private void BtnAddToCart_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                var currentProduct = dgProducts.SelectedItem as GetProductDto;
+
+                if (currentProduct is null)
+                {
+                    MessageBox.Show("Please choose a product");
+                    return;
+                }
+
+                var result = MessageBox.Show("Add this product to cart?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                var member = MemberSession.CurrentMember;
+
+                if (member is null)
+                {
+                    return;
+                }
+
+                var orderInCart = _orderRepository.GetOrderByStatus(member.MemberId, OrderStatus.InCart);
+
+                if (orderInCart is null)
+                {
+                    var createOrderDto = new CreateOrderDto
+                    {
+                        OrderDate = DateTime.Now,
+                        MemberId = member.MemberId,
+                        Status = OrderStatus.InCart.ToString()
+                    };
+
+                    orderInCart = _orderRepository.CreateOrder(createOrderDto);
+                }
+
+                _orderDetailRepository.CreateOrderDetails(new CreateOrderDetailDto
+                {
+                    OrderId = orderInCart.OrderId,
+                    ProductId = currentProduct.ProductId,
+                    Quantity = Quantity,
+                    UnitPrice = currentProduct.UnitPrice
+                });
+
+                MessageBox.Show("Add product to cart success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -163,7 +283,7 @@ namespace SalesWpfApp
         private void WindowProducts_Loaded(object sender, RoutedEventArgs e)
         {
             bool isUser = MemberSession.Role == Role.User.ToString();
-            btnOrder.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
+            btnAddToCart.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
             LoadProducts();
         }
 

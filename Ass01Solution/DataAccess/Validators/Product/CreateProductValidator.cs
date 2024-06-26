@@ -12,7 +12,6 @@ namespace DataAccess.Validators.Product
     {
         public CreateProductValidator()
         {
-            RuleFor(p => p.ProductId).NotEmpty().WithMessage("Product id is required");
             RuleFor(p => p.ProductName).NotEmpty().WithMessage("Product name is required");
             RuleFor(p => p.ProductName).MaximumLength(100).WithMessage("Product name is too long");
             RuleFor(p => p.UnitPrice).GreaterThan(0).WithMessage("Unit price must > 0");

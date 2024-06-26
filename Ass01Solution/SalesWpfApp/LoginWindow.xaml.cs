@@ -74,12 +74,12 @@ namespace SalesWpfApp
                     //    MemberSession.Role = "Admin";
                     //}
 
-                    new WindowProducts().Show();
+                    new HomeWindow().Show();
                 }
                 else if (Email == adminEmail && Password == adminPassword)
                 {
                     MemberSession.Role = Role.Admin.ToString();
-                    new WindowProducts().Show();
+                    new HomeWindow().Show();
                 }
                 else
                 {
