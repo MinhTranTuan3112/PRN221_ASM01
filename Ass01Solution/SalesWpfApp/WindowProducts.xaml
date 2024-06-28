@@ -11,7 +11,7 @@
         <DataGrid
         x:Name="dgProducts"
         Width="600"
-        Height="300" Margin="39,96,161,38" IsReadOnly="True"/>
+        Height="300" Margin="10,109,190,25" IsReadOnly="True"/>
 
         <Label x:Name="lbSearch" Content="Search" HorizontalAlignment="Left" Margin="39,29,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtKeyword" HorizontalAlignment="Left" Margin="106,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="279"/>
@@ -52,9 +52,9 @@
         <Button x:Name="btnAddToCart"
                 Background="Green"
                 Foreground="White"
-            Content="Add to cart" HorizontalAlignment="Left" Margin="678,20,0,0" VerticalAlignment="Top" Height="58" Width="79"/>
+            Content="Add to cart" HorizontalAlignment="Left" Margin="685,53,0,0" VerticalAlignment="Top" Height="47" Width="67"/>
         <Button x:Name="btnViewCart"
-            Content="View Cart" HorizontalAlignment="Left" Margin="588,31,0,0" VerticalAlignment="Top" Height="38" Width="65"/>
+            Content="View Cart" HorizontalAlignment="Left" Margin="684,8,0,0" VerticalAlignment="Top" Height="38" Width="68"/>
         <TextBox x:Name="txtQuantity" 
                  Text="1"
                  TextAlignment="Center"
@@ -62,7 +62,7 @@
                  Margin="690,129,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="56"/>
-       <Button x:Name="btnIncrease" Content="+" HorizontalAlignment="Left" 
+        <Button x:Name="btnIncrease" Content="+" HorizontalAlignment="Left" 
                Width="20"
                Height="20"
                Margin="755,128,0,0"
@@ -76,7 +76,7 @@
         <Button x:Name="btnRefresh" 
                 Content="Refresh"
                 HorizontalAlignment="Left"
-                Margin="678,178,0,0" 
+                Margin="679,165,0,0" 
                 VerticalAlignment="Top"
                 Height="39" 
                 Width="73"/>

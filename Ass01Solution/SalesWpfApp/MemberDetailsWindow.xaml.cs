@@ -147,8 +147,14 @@ namespace SalesWpfApp
         {
             try
             {
-
-                tbTitle.Text = IsUpdate ? "Member Details" : "Create New Member";
+                if (MemberSession.CurrentMember is not null)
+                {
+                    tbTitle.Text = "Profile";
+                }
+                else
+                {
+                    tbTitle.Text = IsUpdate ? "Member Details" : "Create New Member";
+                }
                 btnSave.Content = IsUpdate ? "Save" : "Create";
                 txtId.IsReadOnly = true;
                 txtId.Visibility = IsUpdate ? Visibility.Visible : Visibility.Hidden;

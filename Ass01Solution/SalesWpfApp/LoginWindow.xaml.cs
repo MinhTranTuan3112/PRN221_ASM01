@@ -69,10 +69,7 @@ namespace SalesWpfApp
                 if (member is not null)
                 {
                     MemberSession.CurrentMember = member;
-                    //if (Email == adminEmail && Password == adminPassword)
-                    //{
-                    //    MemberSession.Role = "Admin";
-                    //}
+                    MemberSession.Role = Role.User.ToString();
 
                     new HomeWindow().Show();
                 }

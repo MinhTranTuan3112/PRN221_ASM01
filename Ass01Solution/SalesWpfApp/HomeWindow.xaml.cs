@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObject.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,45 @@ namespace SalesWpfApp
         public HomeWindow()
         {
             InitializeComponent();
+
+            this.Loaded += HomeWindow_Loaded;
             btnMembers.Click += BtnMembers_Click;
             btnProducts.Click += BtnProducts_Click;
             btnOrders.Click += BtnOrders_Click;
+            btnLogOut.Click += BtnLogOut_Click;
+        }
+
+        private void BtnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var result = MessageBox.Show("Are you sure you want to log out?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result is not MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                MemberSession.Role = string.Empty;
+                MemberSession.CurrentMember = null;
+
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void HomeWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            bool isAdmin = MemberSession.Role == Role.Admin.ToString();
+
+            if (!isAdmin)
+            {
+                btnMembers.Content = "Profile";
+            }
         }
 
         private void BtnOrders_Click(object sender, RoutedEventArgs e)
@@ -39,7 +76,21 @@ namespace SalesWpfApp
 
         private void BtnMembers_Click(object sender, RoutedEventArgs e)
         {
-            new WindowMembers().Show();
+            bool isAdmin = MemberSession.Role == Role.Admin.ToString();
+            if (isAdmin)
+            {
+                new WindowMembers().Show();
+                return;
+            }
+
+            var member = MemberSession.CurrentMember;
+            var profileWindow = new MemberDetailsWindow
+            {
+                IsUpdate = true,
+                MemberId = member?.MemberId
+            };
+
+            profileWindow.Show();
         }
     }
 

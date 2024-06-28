@@ -289,9 +289,22 @@ namespace SalesWpfApp
 
         private void WindowProducts_Loaded(object sender, RoutedEventArgs e)
         {
+            PerformAuthorization();
+            LoadProducts();
+        }
+
+        private void PerformAuthorization()
+        {
             bool isUser = MemberSession.Role == Role.User.ToString();
             btnAddToCart.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
-            LoadProducts();
+
+
+
+            btnCreate.Visibility = isUser ? Visibility.Hidden : Visibility.Visible;
+            btnUpdate.Visibility = isUser ? Visibility.Hidden : Visibility.Visible;
+            btnDelete.Visibility = isUser ? Visibility.Hidden : Visibility.Visible;
+
+
         }
 
         private void LoadProducts()
