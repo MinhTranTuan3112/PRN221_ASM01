@@ -50,9 +50,27 @@ namespace SalesWpfApp
 
             //Events
             btnSubmit.Click += BtnSubmit_Click;
+
+            var window = Window.GetWindow(this);
+            window.KeyDown += Window_KeyDown;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter)
+            {
+                return;
+            }
+
+            PerformSubmit();
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            PerformSubmit();
+        }
+
+        private void PerformSubmit()
         {
             try
             {

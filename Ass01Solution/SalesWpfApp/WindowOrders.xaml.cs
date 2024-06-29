@@ -50,6 +50,32 @@ namespace SalesWpfApp
             this.Loaded += WindowOrders_Loaded;
             btnApply.Click += BtnApply_Click;
             btnReset.Click += BtnReset_Click;
+            btnDetails.Click += BtnDetails_Click;
+        }
+
+        private void BtnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var order = dgOrders.SelectedItem as GetOrderDto;
+                if (order is null)
+                {
+                    throw new Exception("Please select an order");
+                }
+
+                var detailsWindow = new OrderDetailsWindow
+                {
+                    IsUpdate = true,
+                    OrderId = order.OrderId
+                };
+
+                detailsWindow.Show();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
@@ -75,15 +101,10 @@ namespace SalesWpfApp
             {
                 var member = MemberSession.CurrentMember;
 
-                if (member is null)
-                {
-                    return;
-                }
-
                 if (MemberSession.Role == Role.Admin.ToString())
                 {
                     //Allow all actions
-                    return;
+                    
                 }
 
                 //if user, only allow to view his/her orders

@@ -31,6 +31,15 @@ namespace DataAccess.DAO
             return total;                   
         }
 
+        public Order? GetOrderDetailsById(int id)
+        {
+            return _context.Orders
+                                .Include(o => o.Member)
+                                .Include(o => o.OrderDetails)
+                                .ThenInclude(od => od.Product)
+                                .SingleOrDefault(o => o.OrderId == id);
+        }
+
         public Order? GetOrderById(int id, bool hasTrackings = true)
         {
             return hasTrackings ? _context.Orders.SingleOrDefault(o => o.OrderId == id)

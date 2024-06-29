@@ -39,6 +39,18 @@ namespace DataAccess.Repositories
             return OrderDAO.Instance.GerOrderByStatus(memberId, orderStatus);
         }
 
+        public GetFullOrderInfoDto GetOrderDetailsById(int id)
+        {
+            var order = OrderDAO.Instance.GetOrderDetailsById(id);
+
+            if (order is null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            return order.Adapt<GetFullOrderInfoDto>();
+        }
+
         public List<GetOrderDto> GetOrders(DateTime? startDate = null, DateTime? endDate = null, int? memberId = null)
         {
             return OrderDAO.Instance.GetOrders(startDate, endDate, memberId).Adapt<List<GetOrderDto>>();

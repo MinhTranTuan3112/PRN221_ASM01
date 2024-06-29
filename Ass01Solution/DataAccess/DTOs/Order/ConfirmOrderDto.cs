@@ -19,6 +19,6 @@ namespace DataAccess.DTOs.Order
 
         public decimal? Freight { get; set; }
 
-        public string Status { get; set; } = OrderStatus.Finished.ToString();
+        public string Status { get; set; } = OrderStatus.Pending.ToString();
     }
 }

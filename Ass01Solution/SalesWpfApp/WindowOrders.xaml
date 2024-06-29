@@ -12,6 +12,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"/>
         <DataGrid x:Name="dgOrders"
+                  IsReadOnly="True"
                   Height="250" Margin="31,148,131,36"/>
         <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="135,80,0,0" VerticalAlignment="Top" Width="116"/>
         <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="343,80,0,0" VerticalAlignment="Top" Width="119"/>
@@ -19,6 +20,7 @@
         <Label Content="To date" HorizontalAlignment="Left" Margin="281,80,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnApply" Content="Apply" HorizontalAlignment="Left" Margin="497,79,0,0" VerticalAlignment="Top" Height="26" Width="55"/>
         <Button x:Name="btnReset" Content="Clear filter" HorizontalAlignment="Left" Margin="482,111,0,0" VerticalAlignment="Top" Height="25" Width="85"/>
-
+        <Button x:Name="btnDetails" Content="Details" HorizontalAlignment="Left" Margin="694,172,0,0" VerticalAlignment="Top" Height="45" Width="65"/>
+        
     </Grid>
 </Window>

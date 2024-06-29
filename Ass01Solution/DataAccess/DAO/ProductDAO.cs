@@ -79,6 +79,10 @@ namespace DataAccess.DAO
 
         public void DeleteProduct(int productId)
         {
+            if (_context.OrderDetails.Any(od => od.ProductId == productId))
+            {
+                throw new Exception("Can't delete this product since it is already been purchased");
+            }
             _context.Products.Where(p => p.ProductId == productId)
                             .ExecuteDelete();
         }

@@ -22,5 +22,7 @@ namespace DataAccess.Repositories
         List<GetOrderDto> GetOrders(DateTime? startDate = default, DateTime? endDate = default, int? memberId = null);
 
         void ConfirmOrder(ConfirmOrderDto confirmOrderDto);
+
+        GetFullOrderInfoDto? GetOrderDetailsById(int id);
     }
 }

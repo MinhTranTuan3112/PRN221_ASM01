@@ -9,6 +9,7 @@ namespace BusinessObject.Enum
     public enum OrderStatus
     {
         InCart,
+        Pending,
         Finished
     }
 }
