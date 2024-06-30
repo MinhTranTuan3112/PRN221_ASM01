@@ -30,21 +30,20 @@
         <TextBox x:Name="txtId" Text="{Binding OrderId}" FontSize="20" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Margin="10, 10, 10, 10" />
 
         <Label x:Name="lbOrderDate" Content="Order Date" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"/>
-        <DatePicker x:Name="dpOrderDate" SelectedDate="{Binding OrderDate}" FontSize="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="10, 10, 10, 10"/>
+        <DatePicker x:Name="dpOrderDate" FontSize="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="10, 10, 10, 10"/>
 
         <Label x:Name="lbRequiredDate" Content="Required Date" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3"/>
         <DatePicker x:Name="dpRequiredDate" 
-                    SelectedDate="{Binding RequiredDate}" FontSize="20" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="10, 10, 10, 10"/>
+                    FontSize="20" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="10, 10, 10, 10"/>
 
         <Label x:Name="lbShippedDate" Content="Shipped Date" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4"/>
         <DatePicker x:Name="dpShippedDate" 
                     FontSize="20" 
-                    SelectedDate="{Binding ShippedDate}"
                     Grid.Column="1" Grid.Row="4" 
                     Grid.ColumnSpan="2" Margin="10, 10, 10, 10"/>
 
         <Label x:Name="lbFreight" Content="Freight" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5"/>
-        <TextBox x:Name="txtFreight" Text="{Binding Freight}" FontSize="20" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Margin="10, 10, 10, 10"/>
+        <TextBox x:Name="txtFreight" FontSize="20" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="1" Margin="10, 10, 10, 10"/>
 
 
         <Label x:Name="lbStatus" Content="Status" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6"/>

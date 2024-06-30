@@ -2,4 +2,5 @@
 - Số điện thoại : 0989888806
 - MSSV : SE172842
 - Điểm tự đánh giá : 7
-- Link youtube or google drive (public): 
+- Link youtube: https://www.youtube.com/watch?v=VuZczlHFG7s
+- Link google drive: https://drive.google.com/file/d/1FkwnHr12aVtuT1TmgACp__LwFmeiXypT/view?usp=drive_link

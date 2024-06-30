@@ -51,6 +51,37 @@ namespace SalesWpfApp
             btnApply.Click += BtnApply_Click;
             btnReset.Click += BtnReset_Click;
             btnDetails.Click += BtnDetails_Click;
+            btnDelete.Click += BtnDelete_Click;
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var order = dgOrders.SelectedItem as GetOrderDto;
+                if (order is null)
+                {
+                    throw new Exception("Please select an order");
+                }
+
+                var result = MessageBox.Show("Are you sure you want to delete this order?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result is not MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                _orderRepository.DeleteOrder(order.OrderId);
+
+                MessageBox.Show("Delete order success");
+                LoadOrders();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void BtnDetails_Click(object sender, RoutedEventArgs e)
@@ -100,12 +131,10 @@ namespace SalesWpfApp
             try
             {
                 var member = MemberSession.CurrentMember;
+                bool isAdmin = MemberSession.Role == Role.Admin.ToString();
 
-                if (MemberSession.Role == Role.Admin.ToString())
-                {
-                    //Allow all actions
-                    
-                }
+                btnDelete.Visibility = isAdmin ? Visibility.Visible : Visibility.Hidden;
+                
 
                 //if user, only allow to view his/her orders
                 memberId = member is not null ? member.MemberId : null;

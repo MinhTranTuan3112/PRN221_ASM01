@@ -191,6 +191,8 @@ namespace SalesWpfApp
                     UnitPrice = currentProduct.UnitPrice
                 });
 
+                
+
                 MessageBox.Show("Add product to cart success");
             }
             catch (Exception ex)
@@ -218,6 +220,10 @@ namespace SalesWpfApp
                 }
 
                 _productRepository.DeleteProduct(currentProduct.ProductId);
+
+                MessageBox.Show("Delete product success!");
+
+                LoadProducts();
 
             }
             catch (Exception ex)
@@ -297,7 +303,11 @@ namespace SalesWpfApp
         {
             bool isUser = MemberSession.Role == Role.User.ToString();
             btnAddToCart.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
-
+            btnViewCart.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
+            lbQuantity.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
+            btnIncrease.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
+            btnDecrease.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
+            txtQuantity.Visibility = isUser ? Visibility.Visible : Visibility.Hidden;
 
 
             btnCreate.Visibility = isUser ? Visibility.Hidden : Visibility.Visible;

@@ -34,6 +34,12 @@ namespace DataAccess.Repositories
             return order;
         }
 
+        public void DeleteOrder(int orderId)
+        {
+            OrderDAO.Instance.DeleteOrder(orderId);
+            OrderDAO.Instance.SaveChanges();
+        }
+
         public Order? GetOrderByStatus(int memberId, OrderStatus orderStatus)
         {
             return OrderDAO.Instance.GerOrderByStatus(memberId, orderStatus);
@@ -53,12 +59,33 @@ namespace DataAccess.Repositories
 
         public List<GetOrderDto> GetOrders(DateTime? startDate = null, DateTime? endDate = null, int? memberId = null)
         {
-            return OrderDAO.Instance.GetOrders(startDate, endDate, memberId).Adapt<List<GetOrderDto>>();
+            var orders = OrderDAO.Instance.GetOrders(startDate, endDate, memberId);
+            return orders.Adapt<List<GetOrderDto>>();
         }
 
         public int SaveChanges()
         {
             return OrderDAO.Instance.SaveChanges();
+        }
+
+        public void UpdateOrder(int orderId, UpdateOrderDto updateOrderDto)
+        {
+            var order = OrderDAO.Instance.GetOrderById(orderId);
+
+            if (order is null)
+            {
+                return;
+            }
+
+
+            TypeAdapterConfig<Order, UpdateOrderDto>.NewConfig().IgnoreNullValues(true);
+            updateOrderDto.Adapt(order);
+            OrderDAO.Instance.SaveChanges();
+        }
+
+        public void UpdateOrderFreight(int orderId)
+        {
+            OrderDAO.Instance.UpdateOrderFreight(orderId);
         }
 
         public void UpdateOrderStatus(int orderId, OrderStatus orderStatus)

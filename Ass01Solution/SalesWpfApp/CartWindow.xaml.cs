@@ -81,6 +81,8 @@ namespace SalesWpfApp
                     ShippedDate = ShippedDate,
                 });
 
+                _orderRepository.UpdateOrderFreight(orderId);
+
                 MessageBox.Show("Confirm order success!");
                 this.Close();
             }
@@ -120,6 +122,10 @@ namespace SalesWpfApp
                     UnitPrice = od.UnitPrice,
                     Discount = od.Discount
                 });
+
+                decimal total = orderDetails.Sum(od => od.UnitPrice * od.Quantity);
+
+                tbTotal.Text = $"Total: {total}";
 
                 orderId = orderInCart.OrderId;
                 

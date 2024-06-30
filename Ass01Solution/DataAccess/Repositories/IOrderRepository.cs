@@ -15,6 +15,8 @@ namespace DataAccess.Repositories
 
         Order? GetOrderByStatus(int memberId, OrderStatus orderStatus);
 
+        void UpdateOrderFreight(int orderId);
+
         void UpdateOrderStatus(int orderId, OrderStatus orderStatus);
 
         int SaveChanges();
@@ -24,5 +26,9 @@ namespace DataAccess.Repositories
         void ConfirmOrder(ConfirmOrderDto confirmOrderDto);
 
         GetFullOrderInfoDto? GetOrderDetailsById(int id);
+
+        void UpdateOrder(int orderId, UpdateOrderDto updateOrderDto);
+
+        void DeleteOrder(int orderId);
     }
 }

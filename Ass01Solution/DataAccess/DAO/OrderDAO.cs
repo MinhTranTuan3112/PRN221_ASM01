@@ -33,11 +33,29 @@ namespace DataAccess.DAO
 
         public Order? GetOrderDetailsById(int id)
         {
-            return _context.Orders
+            return _context.Orders.AsNoTracking()
                                 .Include(o => o.Member)
                                 .Include(o => o.OrderDetails)
                                 .ThenInclude(od => od.Product)
                                 .SingleOrDefault(o => o.OrderId == id);
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            _context.OrderDetails.Where(od => od.OrderId == orderId)
+                                .ExecuteDelete();
+            _context.Orders.Where(o => o.OrderId == orderId)
+                        .ExecuteDelete();
+        }
+
+        public void UpdateOrderFreight(int orderId)
+        {
+            decimal newFreight = _context.OrderDetails.Where(od => od.OrderId == orderId)
+                                                  .Sum(od => od.UnitPrice * od.Quantity);
+
+            _context.Orders.Where(o => o.OrderId == orderId)
+                            .ExecuteUpdate(setter => setter.SetProperty(o => o.Freight, newFreight));
+                            
         }
 
         public Order? GetOrderById(int id, bool hasTrackings = true)

@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Enum;
+using DataAccess.DTOs.Order;
 using DataAccess.Repositories;
 using Mapster.Utils;
 using System;
@@ -26,6 +27,27 @@ namespace SalesWpfApp
 
         public bool IsUpdate { get; set; } = true;
 
+
+        public DateTime? RequiredDate
+        {
+            get { return dpRequiredDate.SelectedDate; }
+            set { dpRequiredDate.SelectedDate = value; }
+        }
+
+
+        public DateTime? ShippedDate
+        {
+            get { return dpShippedDate.SelectedDate; }
+            set { dpShippedDate.SelectedDate = value; }
+        }
+
+        public decimal? Freight
+        {
+            get { return Convert.ToDecimal(txtFreight.Text); }
+            set { txtFreight.Text = value.ToString(); }
+        }
+
+
         private readonly IOrderRepository _orderRepository;
 
         public OrderDetailsWindow()
@@ -52,11 +74,18 @@ namespace SalesWpfApp
                     return;
                 }
 
-                _orderRepository.UpdateOrderStatus(OrderId, (OrderStatus)Enum.Parse(typeof(OrderStatus), cbStatus.SelectedItem.ToString()!));
+                _orderRepository.UpdateOrder(OrderId, new UpdateOrderDto
+                {
+                    OrderDate = dpOrderDate.SelectedDate!.Value,
+                    RequiredDate = RequiredDate,
+                    ShippedDate = ShippedDate,
+                    Freight = Freight,
+                    Status = (string)cbStatus.SelectedItem,
+                });
 
 
                 MessageBox.Show("Update order success!");
-                
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -86,6 +115,10 @@ namespace SalesWpfApp
 
                 cbStatus.SelectedItem = order.Status;
                 txtMember.Text = order.Member.Email;
+                dpOrderDate.SelectedDate = order.OrderDate;
+                dpRequiredDate.SelectedDate = order.RequiredDate;
+                dpShippedDate.SelectedDate = order.ShippedDate;
+                Freight = order.Freight;
 
                 dgOrderDetails.ItemsSource = order.OrderDetails.Select(od => new
                 {
@@ -96,6 +129,7 @@ namespace SalesWpfApp
                     Discount = od.Discount
                 });
 
+               
             }
             catch (Exception ex)
             {

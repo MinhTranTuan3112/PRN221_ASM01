@@ -26,6 +26,11 @@
         <DatePicker x:Name="dpShippedDate" HorizontalAlignment="Left" Margin="654,175,0,0" VerticalAlignment="Top" Width="136"/>
         <Label Content="Shipped Date" HorizontalAlignment="Left" Margin="562,175,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.196,0.109"/>
         <GroupBox Header="Order Info" Margin="542,93,10,201"/>
+        <TextBlock x:Name="tbTotal" HorizontalAlignment="Left" Margin="603,307,0,0" TextWrapping="Wrap" 
+                   Text="Total: ..." 
+                   FontSize="30"
+                   Foreground="Red"
+                   VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

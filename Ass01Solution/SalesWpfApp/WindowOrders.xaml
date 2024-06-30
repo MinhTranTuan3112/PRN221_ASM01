@@ -21,6 +21,7 @@
         <Button x:Name="btnApply" Content="Apply" HorizontalAlignment="Left" Margin="497,79,0,0" VerticalAlignment="Top" Height="26" Width="55"/>
         <Button x:Name="btnReset" Content="Clear filter" HorizontalAlignment="Left" Margin="482,111,0,0" VerticalAlignment="Top" Height="25" Width="85"/>
         <Button x:Name="btnDetails" Content="Details" HorizontalAlignment="Left" Margin="694,172,0,0" VerticalAlignment="Top" Height="45" Width="65"/>
-        
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="694,258,0,0" VerticalAlignment="Top" Height="45" Width="65"/>
+
     </Grid>
 </Window>
